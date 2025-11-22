@@ -1,0 +1,659 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breakpoint - ImGuiColorTextEdit Documentation</title>
+</head>
+
+<body>
+  <div>
+    <h1>Breakpoint</h1>
+    <h2>Overview</h2>
+    <p>The TextEditor class is the main class in ImGuiColorTextEdit responsible for text editing functionalities. It
+      provides a rich set of features such as syntax highlighting, cursor management, selection, undo/redo, and
+      clipboard support. It is designed to be rendered inside an ImGui window.</p>
+    <h2>Constructor Summary</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>TextEditor()</td>
+        <td>Default constructor. Initializes an empty text editor with default settings.</td>
+      </tr>
+    </table>
+
+    <h2>Structs</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>struct</td>
+          <td><a href="" target="_blank">Breakpoint</a></td>
+          <td>Represents a line breakpoint with line number, enabled flag, and optional condition</td>
+        </tr>
+        <tr>
+          <td>struct</td>
+          <td><a href="" target="_blank">Coordinates</a></td>
+          <td>Character coordinates (line and column) in the editor</td>
+        </tr>
+        <tr>
+          <td>struct</td>
+          <td><a href="" target="_blank">Glyph</a></td>
+          <td>Represents a single character with color and comment/preprocessor flags</td>
+        </tr>
+        <tr>
+          <td>struct</td>
+          <td><a href="" target="_blank">Identifier</a></td>
+          <td>Stores declaration and location of a language identifier</td>
+        </tr>
+        <tr>
+          <td>struct</td>
+          <td><a href="" target="_blank">LanguageDefinition</a></td>
+          <td>Definition of language rules for syntax highlighting, including keywords and tokenizer</td>
+        </tr>
+        <tr>
+          <td>struct</td>
+          <td><a href="" target="_blank">EditorState</a></td>
+          <td>Internal struct holding cursor and selection state</td>
+        </tr>
+        <tr>
+          <td>class</td>
+          <td><a href="" target="_blank">UndoRecord</a></td>
+          <td>Represents a single undo/redo action in the editor</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">Breakpoints</a></td>
+          <td>Set of integer line numbers used for breakpoints</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">Char</a></td>
+          <td>Character type used for editor text (uint8_t)</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">ErrorMarkers</a></td>
+          <td>Map of line numbers to error messages</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">Identifiers</a></td>
+          <td>Map from identifier name to Identifier struct</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">Keywords</a></td>
+          <td>Set of language keywords</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">Line</a></td>
+          <td>Vector of Glyphs representing a single line of text</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">Lines</a></td>
+          <td>Vector of Line, representing all text in the editor</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">Palette</a></td>
+          <td>Array of colors (ImU32) for syntax highlighting</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">RegexList</a></td>
+          <td>Vector of regex and palette pairs used for syntax highlighting</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">String</a></td>
+          <td>Alias for std::string</td>
+        </tr>
+        <tr>
+          <td>typedef</td>
+          <td><a href="" target="_blank">UndoBuffer</a></td>
+          <td>Vector of UndoRecord used for undo/redo stack</td>
+        </tr>
+        <tr>
+          <td>enum class</td>
+          <td><a href="" target="_blank">PaletteIndex</a></td>
+          <td>Indexes for syntax highlighting palette (Default, Keyword, Number, etc.)</td>
+        </tr>
+        <tr>
+          <td>enum class</td>
+          <td><a href="" target="_blank">SelectionMode</a></td>
+          <td>Modes for text selection (Normal, Word, Line)</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <h2>Functions</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <thead>
+        <tr>
+          <th>Return Type</th>
+          <th>Function</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TextEditor</td>
+          <td>TextEditor()</td>
+          <td>Constructor: initializes a new TextEditor instance</td>
+        </tr>
+        <tr>
+          <td>~TextEditor</td>
+          <td>~TextEditor()</td>
+          <td>Destructor: cleans up the TextEditor</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetLanguageDefinition(LanguageDefinition &aLanguageDef)</td>
+          <td>Set the language definition for syntax highlighting</td>
+        </tr>
+        <tr>
+          <td>const LanguageDefinition&</td>
+          <td>GetLanguageDefinition() const</td>
+          <td>Get the current language definition</td>
+        </tr>
+        <tr>
+          <td>const Palette&</td>
+          <td>GetPalette() const</td>
+          <td>Get the current base color palette</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetPalette(const Palette &aValue)</td>
+          <td>Set a new palette for syntax highlighting</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetErrorMarkers(const ErrorMarkers &aMarkers)</td>
+          <td>Set error markers for lines</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetBreakpoints(const Breakpoints &aMarkers)</td>
+          <td>Set breakpoints on lines</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Render(const char* aTitle, ImVec2 aSize = ImVec2(), bool aBorder = false)</td>
+          <td>Render the TextEditor in an ImGui window</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetText(const std::string &aText)</td>
+          <td>Set the editor text as a single string</td>
+        </tr>
+        <tr>
+          <td>std::string</td>
+          <td>GetText() const</td>
+          <td>Get the entire editor text as a string</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetTextLines(const std::vector<std::string> &aLines)</td>
+          <td>Set the editor text from multiple lines</td>
+        </tr>
+        <tr>
+          <td>std::vector<std::string>
+          </td>
+          <td>GetTextLines() const</td>
+          <td>Get editor text as a vector of lines</td>
+        </tr>
+        <tr>
+          <td>std::string</td>
+          <td>GetSelectedText() const</td>
+          <td>Get the currently selected text</td>
+        </tr>
+        <tr>
+          <td>std::string</td>
+          <td>GetCurrentLineText() const</td>
+          <td>Get the text of the current line</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>GetTotalLines() const</td>
+          <td>Get the total number of lines in the editor</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsOverwrite() const</td>
+          <td>Check if overwrite mode is enabled</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetReadOnly(bool aValue)</td>
+          <td>Set the editor to read-only or writable</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsReadOnly() const</td>
+          <td>Check if the editor is read-only</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsTextChanged() const</td>
+          <td>Check if text has been modified</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsCursorPositionChanged() const</td>
+          <td>Check if cursor position changed</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsColorizerEnabled() const</td>
+          <td>Check if syntax colorizer is enabled</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetColorizerEnable(bool aValue)</td>
+          <td>Enable or disable syntax colorizer</td>
+        </tr>
+        <tr>
+          <td>Coordinates</td>
+          <td>GetCursorPosition() const</td>
+          <td>Get the current cursor coordinates</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetCursorPosition(const Coordinates &aPosition)</td>
+          <td>Set the cursor position</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetHandleMouseInputs(bool aValue)</td>
+          <td>Enable or disable mouse input handling</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsHandleMouseInputsEnabled() const</td>
+          <td>Check if mouse input handling is enabled</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetHandleKeyboardInputs(bool aValue)</td>
+          <td>Enable or disable keyboard input handling</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsHandleKeyboardInputsEnabled() const</td>
+          <td>Check if keyboard input handling is enabled</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetImGuiChildIgnored(bool aValue)</td>
+          <td>Ignore or respect ImGui child windows for input</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsImGuiChildIgnored() const</td>
+          <td>Check if ImGui child is ignored</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetShowWhitespaces(bool aValue)</td>
+          <td>Enable or disable whitespace visualization</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>IsShowingWhitespaces() const</td>
+          <td>Check if whitespace is being displayed</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetTabSize(int aValue)</td>
+          <td>Set the tab size</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>GetTabSize() const</td>
+          <td>Get the current tab size</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>InsertText(const std::string &aValue)</td>
+          <td>Insert text at the current cursor position</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>InsertText(const char* aValue)</td>
+          <td>Insert C-string text at the current cursor</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveUp(int aAmount = 1, bool aSelect = false)</td>
+          <td>Move the cursor up</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveDown(int aAmount = 1, bool aSelect = false)</td>
+          <td>Move the cursor down</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveLeft(int aAmount = 1, bool aSelect = false, bool aWordMode = false)</td>
+          <td>Move the cursor left</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveRight(int aAmount = 1, bool aSelect = false, bool aWordMode = false)</td>
+          <td>Move the cursor right</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveTop(bool aSelect = false)</td>
+          <td>Move cursor to the first line</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveBottom(bool aSelect = false)</td>
+          <td>Move cursor to the last line</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveHome(bool aSelect = false)</td>
+          <td>Move cursor to the start of the line</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>MoveEnd(bool aSelect = false)</td>
+          <td>Move cursor to the end of the line</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetSelectionStart(const Coordinates &aPosition)</td>
+          <td>Set selection start coordinate</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetSelectionEnd(const Coordinates &aPosition)</td>
+          <td>Set selection end coordinate</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SetSelection(const Coordinates &aStart, const Coordinates &aEnd, SelectionMode aMode =
+            SelectionMode::Normal)</td>
+          <td>Select a range of text</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SelectWordUnderCursor()</td>
+          <td>Select the word under the cursor</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>SelectAll()</td>
+          <td>Select all text in the editor</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>HasSelection() const</td>
+          <td>Check if there is any text selected</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Copy()</td>
+          <td>Copy selected text to clipboard</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Cut()</td>
+          <td>Cut selected text to clipboard</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Paste()</td>
+          <td>Paste clipboard text at cursor</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Delete()</td>
+          <td>Delete character or selection at cursor</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>CanUndo() const</td>
+          <td>Check if undo is available</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>CanRedo() const</td>
+          <td>Check if redo is available</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Undo(int aSteps = 1)</td>
+          <td>Undo one or more steps</td>
+        </tr>
+        <tr>
+          <td>void</td>
+          <td>Redo(int aSteps = 1)</td>
+          <td>Redo one or more steps</td>
+        </tr>
+        <tr>
+          <td>static const Palette&</td>
+          <td>GetDarkPalette()</td>
+          <td>Get the dark color palette</td>
+        </tr>
+        <tr>
+          <td>static const Palette&</td>
+          <td>GetLightPalette()</td>
+          <td>Get the light color palette</td>
+        </tr>
+        <tr>
+          <td>static const Palette&</td>
+          <td>GetRetroBluePalette()</td>
+          <td>Get the retro blue palette</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+    <h2>Members</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Member</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>bool</td>
+          <td>mCheckComments</td>
+          <td>Internal flag for comment checking</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>mColorRangeMax</td>
+          <td>Maximum line for colorization</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>mColorRangeMin</td>
+          <td>Minimum line for colorization</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mColorizerEnabled</td>
+          <td>Enable syntax coloring</td>
+        </tr>
+        <tr>
+          <td>Coordinates</td>
+          <td>mInteractiveEnd</td>
+          <td>Selection interaction end coordinate</td>
+        </tr>
+        <tr>
+          <td>Coordinates</td>
+          <td>mInteractiveStart</td>
+          <td>Selection interaction start coordinate</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mIgnoreImGuiChild</td>
+          <td>Ignore ImGui child for input handling</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mHandleKeyboardInputs</td>
+          <td>Enable keyboard input handling</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mHandleMouseInputs</td>
+          <td>Enable mouse input handling</td>
+        </tr>
+        <tr>
+          <td>Palette</td>
+          <td>mPalette</td>
+          <td>Current active palette</td>
+        </tr>
+        <tr>
+          <td>Palette</td>
+          <td>mPaletteBase</td>
+          <td>Base color palette</td>
+        </tr>
+        <tr>
+          <td>float</td>
+          <td>mLastClick</td>
+          <td>Timestamp of last mouse click</td>
+        </tr>
+        <tr>
+          <td>float</td>
+          <td>mLineSpacing</td>
+          <td>Spacing between lines</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>mLeftMargin</td>
+          <td>Left margin in pixels</td>
+        </tr>
+        <tr>
+          <td>UndoBuffer</td>
+          <td>mUndoBuffer</td>
+          <td>Stores undo/redo records</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>mUndoIndex</td>
+          <td>Current index in the undo buffer</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mOverwrite</td>
+          <td>Overwrite mode flag</td>
+        </tr>
+        <tr>
+          <td>Lines</td>
+          <td>mLines</td>
+          <td>Stores all lines of text as vectors of Glyphs</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mReadOnly</td>
+          <td>Read-only mode flag</td>
+        </tr>
+        <tr>
+          <td>ErrorMarkers</td>
+          <td>mErrorMarkers</td>
+          <td>Error line markers</td>
+        </tr>
+        <tr>
+          <td>ImVec2</td>
+          <td>mCharAdvance</td>
+          <td>Character advance for layout</td>
+        </tr>
+        <tr>
+          <td>SelectionMode</td>
+          <td>mSelectionMode</td>
+          <td>Selection type (Normal, Word, Line)</td>
+        </tr>
+        <tr>
+          <td>EditorState</td>
+          <td>mState</td>
+          <td>Current cursor and selection state</td>
+        </tr>
+        <tr>
+          <td>std::string</td>
+          <td>mLineBuffer</td>
+          <td>Temporary buffer for current line operations</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mScrollToCursor</td>
+          <td>Scroll to cursor on next render</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mScrollToTop</td>
+          <td>Scroll to top on next render</td>
+        </tr>
+        <tr>
+          <td>uint64_t</td>
+          <td>mStartTime</td>
+          <td>Editor start time (e.g., for blinking cursor)</td>
+        </tr>
+        <tr>
+          <td>float</td>
+          <td>mTextStart</td>
+          <td>Pixel position where text starts relative to left margin</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mTextChanged</td>
+          <td>Flag if text changed since last render</td>
+        </tr>
+        <tr>
+          <td>LanguageDefinition</td>
+          <td>mLanguageDefinition</td>
+          <td>Current language rules</td>
+        </tr>
+        <tr>
+          <td>RegexList</td>
+          <td>mRegexList</td>
+          <td>Cached regex rules for syntax highlighting</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mWithinRender</td>
+          <td>Flag indicating if currently rendering</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>mShowWhitespaces</td>
+          <td>Render whitespace characters</td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>mTabSize</td>
+          <td>Tab width in spaces</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <footer>
+    <p style="text-align: center;"><a href="https://github.com/BalazsJako/ImGuiColorTextEdit"
+        target="_blank">ImGuiColorTextEdit</a></p>
+  </footer>
+</body>
+
+</html>
