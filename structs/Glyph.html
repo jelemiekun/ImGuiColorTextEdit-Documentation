@@ -17,14 +17,57 @@
       text with syntax highlighting.</p>
 
     <h2>Constructor Summary</h2>
-
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Glyph(Char aChar, PaletteIndex aColorIndex)</td>
+        <td>Parameterized constructor: initializes the character (mChar) and its color index (mColorIndex). Boolean
+          flags mComment, mMultiLineComment, and mPreprocessor are initialized to false.</td>
+      </tr>
+    </table>
 
     <h2>Structs</h2>
     <p>Does not contain any nested structs or classes you can instantiate.</p>
 
     <h2>Functions</h2>
+    <p>Does not contain any functios.</p>
 
     <h2>Members</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Char</td>
+        <td>mChar</td>
+        <td>The character stored in the glyph.</td>
+      </tr>
+      <tr>
+        <td>PaletteIndex</td>
+        <td>mColorIndex</td>
+        <td>The color of the glyph, represented by a PaletteIndex enum value.</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>mComment</td>
+        <td>Flag indicating if the glyph is part of a comment (single-line).</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>mMultiLineComment</td>
+        <td>Flag indicating if the glyph is part of a multi-line comment.</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>mPreprocessor</td>
+        <td>Flag indicating if the glyph is part of a preprocessor directive.</td>
+      </tr>
+    </table>
 
   </div>
   <hr>
