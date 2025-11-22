@@ -1,0 +1,185 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LanguageDefinition - ImGuiColorTextEdit Documentation</title>
+</head>
+
+<body>
+  <div>
+    <h1>LanguageDefinition</h1>
+    <h2>Overview</h2>
+    <p>Struct Name: <a href="../TextEditor.html" target="_self">TextEditor</a>::<a href="LanguageDefinition.html"
+        target="_self">LanguageDefinition</a>
+    </p>
+    <p>Represents the rules and settings for a specific programming language or text format. It defines how keywords,
+      identifiers, comments, numbers, and other elements are highlighted, as well as other language-specific behaviors
+      like case sensitivity or comment styles.</p>
+
+    <h2>Constructor Summary</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>LanguageDefinition()</td>
+        <td>Default constructor that initializes mPreprocChar to '#', mAutoIndentation to true, mTokenize to nullptr,
+          and mCaseSensitive to true.</td>
+      </tr>
+    </table>
+
+
+    <h2>Structs</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>typedef</td>
+        <td>TokenRegexString</td>
+        <td>Represents a pair of string and PaletteIndex for token regex mappings.</td>
+      </tr>
+      <tr>
+        <td>typedef</td>
+        <td>TokenRegexStrings</td>
+        <td>Vector of TokenRegexString pairs.</td>
+      </tr>
+      <tr>
+        <td>typedef</td>
+        <td>TokenizeCallback</td>
+        <td>Function pointer type for custom tokenization of input text.</td>
+      </tr>
+    </table>
+
+    <h2>Functions</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Return Type</th>
+        <th>Function Name (Parameters)</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>static const LanguageDefinition&</td>
+        <td>CPlusPlus()</td>
+        <td>Returns a predefined LanguageDefinition for C++.</td>
+      </tr>
+      <tr>
+        <td>static const LanguageDefinition&</td>
+        <td>HLSL()</td>
+        <td>Returns a predefined LanguageDefinition for HLSL.</td>
+      </tr>
+      <tr>
+        <td>static const LanguageDefinition&</td>
+        <td>GLSL()</td>
+        <td>Returns a predefined LanguageDefinition for GLSL.</td>
+      </tr>
+      <tr>
+        <td>static const LanguageDefinition&</td>
+        <td>C()</td>
+        <td>Returns a predefined LanguageDefinition for C.</td>
+      </tr>
+      <tr>
+        <td>static const LanguageDefinition&</td>
+        <td>SQL()</td>
+        <td>Returns a predefined LanguageDefinition for SQL.</td>
+      </tr>
+      <tr>
+        <td>static const LanguageDefinition&</td>
+        <td>AngelScript()</td>
+        <td>Returns a predefined LanguageDefinition for AngelScript.</td>
+      </tr>
+      <tr>
+        <td>static const LanguageDefinition&</td>
+        <td>Lua()</td>
+        <td>Returns a predefined LanguageDefinition for Lua.</td>
+      </tr>
+    </table>
+
+
+    <h2>Members</h2>
+    <p>TODO: link data types to corresponding .html</p>
+
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>std::string</td>
+        <td>mName</td>
+        <td>The name of the language definition.</td>
+      </tr>
+      <tr>
+        <td>Keywords</td>
+        <td>mKeywords</td>
+        <td>Set of language keywords.</td>
+      </tr>
+      <tr>
+        <td>Identifiers</td>
+        <td>mIdentifiers</td>
+        <td>Map of identifiers in the language.</td>
+      </tr>
+      <tr>
+        <td>Identifiers</td>
+        <td>mPreprocIdentifiers</td>
+        <td>Map of preprocessor identifiers.</td>
+      </tr>
+      <tr>
+        <td>std::string</td>
+        <td>mCommentStart</td>
+        <td>String that starts a multi-line comment.</td>
+      </tr>
+      <tr>
+        <td>std::string</td>
+        <td>mCommentEnd</td>
+        <td>String that ends a multi-line comment.</td>
+      </tr>
+      <tr>
+        <td>std::string</td>
+        <td>mSingleLineComment</td>
+        <td>String that starts a single-line comment.</td>
+      </tr>
+      <tr>
+        <td>char</td>
+        <td>mPreprocChar</td>
+        <td>Character used to identify preprocessor commands.</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>mAutoIndentation</td>
+        <td>Indicates whether auto-indentation is enabled.</td>
+      </tr>
+      <tr>
+        <td>TokenizeCallback</td>
+        <td>mTokenize</td>
+        <td>Pointer to a function for custom tokenization.</td>
+      </tr>
+      <tr>
+        <td>TokenRegexStrings</td>
+        <td>mTokenRegexStrings</td>
+        <td>List of token regex strings paired with PaletteIndex.</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>mCaseSensitive</td>
+        <td>Indicates whether the language is case-sensitive.</td>
+      </tr>
+    </table>
+
+  </div>
+  <hr>
+  <footer style="text-align: center; font-size: 0.9em; color: #666;">
+    <p>This project aims to provide easy navigation and comprehensive documentation of
+      <strong>ImGuiColorTextEdit</strong>.<br>
+      This documentation was created with the help of <strong>ChatGPT AI</strong>.
+    </p>
+    <p><a href="https://github.com/BalazsJako/ImGuiColorTextEdit" target="_self">ImGuiColorTextEdit on GitHub</a></p>
+  </footer>
+</body>
+
+</html>
