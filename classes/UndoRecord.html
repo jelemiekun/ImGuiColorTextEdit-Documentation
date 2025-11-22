@@ -1,0 +1,157 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UndoRecord - ImGuiColorTextEdit Documentation</title>
+</head>
+
+<body>
+  <div>
+    <h1>UndoRecord</h1>
+    <h2>Overview</h2>
+    <p>Class Name: <a href="../TextEditor.html" target="_self">TextEditor</a>::<a href="UndoRecord.html"
+        target="_self">UndoRecord</a>
+    </p>
+    <p>Represents a single undo/redo action in the editor’s history. An UndoRecord captures all text changes performed
+      during an edit operation, including inserted or removed characters, as well as cursor/selection states before and
+      after the change.
+      <br>This struct makes it possible for the editor to accurately undo or redo modifications while preserving the
+      exact cursor and selection positions.
+    </p>
+
+    <h2>Constructor Summary</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+      </tr>
+
+      <tr>
+        <td>UndoRecord()</td>
+        <td>Default constructor; does nothing special.</td>
+      </tr>
+
+      <tr>
+        <td>~UndoRecord()</td>
+        <td>Default destructor; does nothing special.</td>
+      </tr>
+
+      <tr>
+        <td>
+          UndoRecord(<br>
+          &nbsp;&nbsp;const std::string& aAdded,<br>
+          &nbsp;&nbsp;const Coordinates aAddedStart,<br>
+          &nbsp;&nbsp;const Coordinates aAddedEnd,<br><br>
+
+          &nbsp;&nbsp;const std::string& aRemoved,<br>
+          &nbsp;&nbsp;const Coordinates aRemovedStart,<br>
+          &nbsp;&nbsp;const Coordinates aRemovedEnd,<br><br>
+
+          &nbsp;&nbsp;TextEditor::EditorState& aBefore,<br>
+          &nbsp;&nbsp;TextEditor::EditorState& aAfter<br>
+          )
+        </td>
+        <td>
+          Full constructor that creates an undo record describing added text, removed text,
+          their coordinate ranges, and editor state before and after the action.
+        </td>
+      </tr>
+    </table>
+
+
+    <h2>Structs</h2>
+    <p>Does not contain any nested structs or classes you can instantiate.</p>
+
+    <h2>Functions</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Return Type</th>
+        <th>Function Name (Parameters)</th>
+        <th>Description</th>
+      </tr>
+
+      <tr>
+        <td>void</td>
+        <td>Undo(TextEditor* aEditor)</td>
+        <td>Restores the editor to the state before this undo record was applied.</td>
+      </tr>
+
+      <tr>
+        <td>void</td>
+        <td>Redo(TextEditor* aEditor)</td>
+        <td>Reapplies the changes stored in this undo record.</td>
+      </tr>
+    </table>
+
+
+    <h2>Members</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+
+      <tr>
+        <td>std::string</td>
+        <td>mAdded</td>
+        <td>The text that was added during the edit.</td>
+      </tr>
+
+      <tr>
+        <td>Coordinates</td>
+        <td>mAddedStart</td>
+        <td>Starting coordinate of the added text.</td>
+      </tr>
+
+      <tr>
+        <td>Coordinates</td>
+        <td>mAddedEnd</td>
+        <td>Ending coordinate of the added text.</td>
+      </tr>
+
+      <tr>
+        <td>std::string</td>
+        <td>mRemoved</td>
+        <td>The text that was removed during the edit.</td>
+      </tr>
+
+      <tr>
+        <td>Coordinates</td>
+        <td>mRemovedStart</td>
+        <td>Starting coordinate of the removed text.</td>
+      </tr>
+
+      <tr>
+        <td>Coordinates</td>
+        <td>mRemovedEnd</td>
+        <td>Ending coordinate of the removed text.</td>
+      </tr>
+
+      <tr>
+        <td>EditorState</td>
+        <td>mBefore</td>
+        <td>Editor state before the edit.</td>
+      </tr>
+
+      <tr>
+        <td>EditorState</td>
+        <td>mAfter</td>
+        <td>Editor state after the edit.</td>
+      </tr>
+
+    </table>
+
+  </div>
+  <hr>
+  <footer style="text-align: center; font-size: 0.9em; color: #666;">
+    <p>This project aims to provide easy navigation and comprehensive documentation of
+      <strong>ImGuiColorTextEdit</strong>.<br>
+      This documentation was created with the help of <strong>ChatGPT AI</strong>.
+    </p>
+    <p><a href="https://github.com/BalazsJako/ImGuiColorTextEdit" target="_self">ImGuiColorTextEdit on GitHub</a></p>
+  </footer>
+</body>
+
+</html>
