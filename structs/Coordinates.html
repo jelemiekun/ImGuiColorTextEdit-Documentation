@@ -1,0 +1,112 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordinates - ImGuiColorTextEdit Documentation</title>
+</head>
+
+<body>
+  <div>
+    <h1>Coordinates</h1>
+    <h2>Overview</h2>
+    <p>Struct Name: <a href="../TextEditor.html" target="_self">TextEditor</a>::<a href="Coordinates.html"
+        target="_self">Coordinates</a></p>
+    <p>Represents a specific position in the editor text, defined by a line number and a column index. It is used for
+      cursor positioning, selection, and text manipulation.</p>
+
+
+    <h2>Constructor Summary</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Coordinates()</td>
+        <td>Default constructor: initializes mLine and mColumn to 0.</td>
+      </tr>
+      <tr>
+        <td>Coordinates(int aLine, int aColumn)</td>
+        <td>Parameterized constructor: initializes mLine and mColumn to provided values and asserts they are >= 0.</td>
+      </tr>
+      <tr>
+        <td>static Coordinates Invalid()</td>
+        <td>Static function returning a Coordinates object with mLine and mColumn set to -1 (invalid coordinate).</td>
+      </tr>
+    </table>
+
+    <h2>Structs</h2>
+    <p>Does not contain any nested structs or classes you can instantiate.</p>
+
+    <h2>Functions</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Return Type</th>
+        <th>Function Name (Parameters)</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>operator==(const Coordinates& o) const</td>
+        <td>Returns true if both mLine and mColumn are equal to another Coordinates object.</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>operator!=(const Coordinates& o) const</td>
+        <td>Returns true if either mLine or mColumn differ from another Coordinates object.</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>operator<(const Coordinates& o) const</td>
+        <td>Returns true if this coordinate is before another coordinate in reading order (line major).</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>operator>(const Coordinates& o) const</td>
+        <td>Returns true if this coordinate is after another coordinate in reading order (line major).</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>operator<=(const Coordinates& o) const</td>
+        <td>Returns true if this coordinate is before or equal to another coordinate.</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td>operator>=(const Coordinates& o) const</td>
+        <td>Returns true if this coordinate is after or equal to another coordinate.</td>
+      </tr>
+    </table>
+
+    <h2>Members</h2>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>int</td>
+        <td>mLine</td>
+        <td>The line index of the coordinate (0-based).</td>
+      </tr>
+      <tr>
+        <td>int</td>
+        <td>mColumn</td>
+        <td>The column index of the coordinate (0-based).</td>
+      </tr>
+    </table>
+
+
+  </div>
+  <hr>
+  <footer style="text-align: center; font-size: 0.9em; color: #666;">
+    <p>This project aims to provide easy navigation and comprehensive documentation of
+      <strong>ImGuiColorTextEdit</strong>.<br>
+      This documentation was created with the help of <strong>ChatGPT AI</strong>.
+    </p>
+    <p><a href="https://github.com/BalazsJako/ImGuiColorTextEdit" target="_self">ImGuiColorTextEdit on GitHub</a></p>
+  </footer>
+</body>
+
+</html>
