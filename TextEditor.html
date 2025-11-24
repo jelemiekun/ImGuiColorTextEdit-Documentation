@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TextEditor - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -655,6 +659,56 @@
         </tr>
       </tbody>
     </table>
+
+    <h2>Example</h2>
+    <pre style="font-size: 18px;"><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        void setupTextEditor() {
+            auto lang = TextEditor::LanguageDefinition::CPlusPlus();
+            editor.SetLanguageDefinition(lang);
+
+            // editor.SetPalette(TextEditor::GetLightPalette());
+            editor.SetPalette(TextEditor::GetDarkPalette());
+
+            editor.SetText("
+            // Hello from ImGuiColorTextEdit!\n
+
+            int main() {\n
+            return 0;\n
+            }");
+        }
+
+        void toolbarButtons() {
+            if (ImGui::Button("Undo") && editor.CanUndo()) editor.Undo();
+            ImGui::SameLine();
+
+            if (ImGui::Button("Redo") && editor.CanRedo()) editor.Redo();
+            ImGui::SameLine();
+
+            if (ImGui::Button("Copy")) editor.Copy();
+            ImGui::SameLine();
+
+            if (ImGui::Button("Paste")) editor.Paste();
+            ImGui::SameLine();
+
+            if (ImGui::Button("Select All")) editor.SelectAll();
+        }
+
+        void render() {
+            ImGui::Begin("My Code Editor");
+
+            toolbarButtons();
+
+            editor.Render("TextEditor Example");
+
+            ImGui::End();
+        }
+
+      </code></pre>
   </div>
   <br>
   <hr>
