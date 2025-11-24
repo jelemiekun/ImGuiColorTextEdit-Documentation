@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Breakpoint - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -71,6 +75,46 @@
         </tr>
       </tbody>
     </table>
+
+
+    <h2>Example</h2>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        void Setup() {
+            editor.SetText("
+                int main() {\n
+                int x = 10;\n
+                return x;\n
+                }\n
+            ");
+
+            TextEditor::Breakpoint bp1;
+            bp1.mLine = 3;
+            bp1.mEnabled = true;
+            bp1.mCondition = "";
+
+            TextEditor::Breakpoint bp2;
+            bp2.mLine = 1;
+            bp2.mEnabled = true;
+
+
+            TextEditor::Breakpoints breakpoints;
+            breakpoints.insert(bp1.mLine);
+            breakpoints.insert(bp2.mLine);
+
+            editor.SetBreakpoints(breakpoints);
+        }
+
+        void Render() {
+            ImGui::Begin("Editor With Breakpoints");
+            editor.Render("TextEditor");
+            ImGui::End();
+        }
+      </code></pre>
 
   </div>
   <br>
