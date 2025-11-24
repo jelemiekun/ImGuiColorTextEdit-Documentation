@@ -10,16 +10,21 @@ This documentation is hosted on GitHub Pages:
 Each class or struct in ImGuiColorTextEdit is documented using a consistent and readable layout. Every page follows this structure:
 
 1. Overview
+
     A brief explanation of what the class or struct represents, its purpose, and how it fits into the TextEditor system.
 
 2. Member Structs / Nested Types
+
     Lists and describes any nested types (such as inner structs, enums, or helper types) defined inside the class/struct.
 
 3. Member Variables
+
     Provides an organized table of all member fields
 
 4. Member Functions
+
     Details the public (and occasionally private/internal, if relevant) functions exposed by the class/struct.
 
 5. Example Usage
+
     A short, focused code snippet showing how the class/struct is typically used.
