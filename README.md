@@ -1,3 +1,7 @@
+## Access the Github Pages Site
+This documentation is hosted on GitHub Pages:
+https://jelemiekun.github.io/ImGuiColorTextEdit-Documentation/
+
 ## About the Project
 While creating a game engine, I came across this ImGui addon called [ImGuiColorTextEdit](https://github.com/BalazsJako/ImGuiColorTextEdit). 
 
