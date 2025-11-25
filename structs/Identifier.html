@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Identifier - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -49,6 +53,31 @@
         <td>The declaration string of the identifier.</td>
       </tr>
     </table>
+
+    <h2>Example</h2>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        void setup() {
+            TextEditor::Identifier id;
+            id.mLocation = TextEditor::Coordinates(0, 4);
+            id.mDeclaration = "int";
+
+            TextEditor::Identifiers identifiers;
+            identifiers["x"] = id;
+
+            editor.SetText("int x;");
+        }
+
+        void render() {
+            ImGui::Begin("Editor with Identifiers");
+            editor.Render("TextEditor Example");
+            ImGui::End();
+        }
+      </code></pre>
 
   </div>
   <br>
