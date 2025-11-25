@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coordinates - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -103,7 +107,45 @@
       </tr>
     </table>
 
+    <h2>Example</h2>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+        #include &lt;spdlog/spdlog.h&gt;
 
+        TextEditor editor;
+
+        void setupEditor() {
+            editor.SetText(
+                "int main() {\n"
+                " int x = 42;\n"
+                " return x;\n"
+                "}\n"
+            );
+
+            TextEditor::Coordinates pos(2, 4);
+            editor.SetCursorPosition(pos);
+
+            TextEditor::Coordinates invalid = TextEditor::Coordinates::Invalid();
+            if (invalid.mLine == -1)
+                spdlog::warn("This is invalid coordinate.");
+        }
+
+        void renderEditor() {
+            ImGui::Begin("Editor with Coordinates");
+            editor.Render("TextEditor Example");
+            ImGui::End();
+        }
+
+        void exampleCursorManipulation() {
+            TextEditor::Coordinates cursor = editor.GetCursorPosition();
+            spdlog::trace("Cursor is at line %d, column %d", cursor.mLine, cursor.mColumn);
+
+            TextEditor::Coordinates nextLine(cursor.mLine + 1, 0);
+            editor.SetCursorPosition(nextLine);
+        }
+
+      </code></pre>
   </div>
   <br>
   <hr>
