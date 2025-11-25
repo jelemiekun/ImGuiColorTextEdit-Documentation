@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UndoRecord - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -146,8 +150,51 @@
         <td>mAfter</td>
         <td>Editor state after the edit.</td>
       </tr>
-
     </table>
+
+    <h2>Example</h2>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        void setup() {
+            editor.SetText(
+                "int main()\n"
+                "{\n"
+                " int x = 42;\n"
+                " return x;\n"
+                "}\n"
+            );
+
+            TextEditor::UndoRecord undo1;
+            undo1.mBefore = editor.GetText();
+            editor.InsertText("int y = 10;\n");
+            undo1.mAfter = editor.GetText();
+
+            editor.mUndoBuffer.push_back(undo1);
+            editor.mUndoIndex = static_cast&lt;int&gt;(editor.mUndoBuffer.size() - 1);
+        }
+
+        void render() {
+            ImGui::Begin("Editor with UndoRecord");
+            editor.Render("TextEditor Example");
+            ImGui::End();
+        }
+
+        void performUndo() {
+            if (editor.CanUndo()) {
+                editor.Undo();
+            }
+        }
+
+        void performRedo() {
+            if (editor.CanRedo()) {
+                editor.Redo();
+            }
+        }
+      </code></pre>
 
   </div>
   <br>
