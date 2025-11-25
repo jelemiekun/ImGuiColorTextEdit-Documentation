@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EditorState - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -16,7 +20,7 @@
   <div>
     <h1>EditorState</h1>
     <h2>Overview</h2>
-    <p>Struct/Class Name: <a href="../TextEditor.html" target="_self">TextEditor</a>::<a href="EditorState.html"
+    <p>Struct Name: <a href="../TextEditor.html" target="_self">TextEditor</a>::<a href="EditorState.html"
         target="_self">EditorState</a>
     </p>
     <p>Holds the editor’s current user interaction state, including cursor position, text selection, and the scroll
@@ -55,6 +59,48 @@
         <td>The current cursor position within the text editor.</td>
       </tr>
     </table>
+
+    <h2>Example</h2>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        void setup() {
+            editor.SetText(
+                "int main()\n"
+                "{\n"
+                " int x = 42;\n"
+                " int y = 7;\n"
+                " return x + y;\n"
+                "}\n"
+            );
+
+            TextEditor::EditorState state;
+            state.mCursorPosition = TextEditor::Coordinates(2, 4);
+            state.mSelectionStart = TextEditor::Coordinates(2, 4);
+            state.mSelectionEnd = TextEditor::Coordinates(2, 9);
+
+            editor.mState = state;
+        }
+
+        void render() {
+            ImGui::Begin("Editor with EditorState");
+            editor.Render("TextEditor Example");
+            ImGui::End();
+        }
+
+        void updateCursorAndSelection() {
+            TextEditor::EditorState state = editor.mState;
+
+            state.mCursorPosition = TextEditor::Coordinates(3, 8);
+            state.mSelectionStart = TextEditor::Coordinates(3, 4);
+            state.mSelectionEnd = TextEditor::Coordinates(3, 9);
+
+            editor.mState = state;
+        }
+      </code></pre>
 
   </div>
   <br>
