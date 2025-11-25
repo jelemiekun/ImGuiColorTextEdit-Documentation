@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LanguageDefinition - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -176,6 +180,98 @@
         <td>Indicates whether the language is case-sensitive.</td>
       </tr>
     </table>
+
+    <h2>Example</h2>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        void setup() {
+            TextEditor::LanguageDefinition lang = TextEditor::LanguageDefinition::CPlusPlus();
+            editor.SetLanguageDefinition(lang);
+
+            editor.SetText(
+                "int main()\n"
+                "{\n"
+                " int x = 42;\n"
+                " return x;\n"
+                "}\n"
+            );
+        }
+
+        void render() {
+            ImGui::Begin("Editor with LanguageDefinition");
+            editor.Render("TextEditor Example");
+            ImGui::End();
+        }
+      </code></pre>
+
+    <h3>Custom LanguageDefinition</h3>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        TextEditor::LanguageDefinition createCustomLanguage() {
+            TextEditor::LanguageDefinition lang;
+            lang.mName = "MyLang";
+            lang.mCaseSensitive = true;
+            lang.mAutoIndentation = true;
+            lang.mPreprocChar = '@';
+
+            lang.mSingleLineComment = "//";
+            lang.mCommentStart = "/*";
+            lang.mCommentEnd = "*/";
+
+            lang.mKeywords.insert("if");
+            lang.mKeywords.insert("else");
+            lang.mKeywords.insert("while");
+            lang.mKeywords.insert("return");
+            lang.mKeywords.insert("func");
+
+            lang.mPreprocIdentifiers["include"] = TextEditor::Identifier();
+            lang.mPreprocIdentifiers["define"] = TextEditor::Identifier();
+
+            lang.mIdentifiers["int"] = TextEditor::Identifier();
+            lang.mIdentifiers["float"] = TextEditor::Identifier();
+            lang.mIdentifiers["string"] = TextEditor::Identifier();
+
+            lang.mTokenRegexStrings.push_back({ "\\b[0-9]+\\b", TextEditor::PaletteIndex::Number });
+            lang.mTokenRegexStrings.push_back({ "\".*?\"", TextEditor::PaletteIndex::String });
+            lang.mTokenRegexStrings.push_back({ "//.*", TextEditor::PaletteIndex::Comment });
+            lang.mTokenRegexStrings.push_back({ "/\\*.*?\\*/", TextEditor::PaletteIndex::MultiLineComment });
+
+            return lang;
+        }
+
+        void setupEditor() {
+            TextEditor::LanguageDefinition customLang = createCustomLanguage();
+            editor.SetLanguageDefinition(customLang);
+
+            editor.SetText(
+                "// Custom language example\n"
+                "func main() {\n"
+                " int x = 42;\n"
+                " float y = 3.14;\n"
+                " string s = \"Hello World\";\n"
+                " if (x > 0) {\n"
+                " return;\n"
+                " }\n"
+                "}\n"
+            );
+
+            editor.SetPalette(TextEditor::GetDarkPalette());
+            }
+
+        void render() {
+            ImGui::Begin("Editor with Custom Language");
+            editor.Render("TextEditor Example");
+            ImGui::End();
+        }
+      </code></pre>
 
   </div>
   <br>
