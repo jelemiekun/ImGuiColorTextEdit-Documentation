@@ -84,7 +84,7 @@
 
         TextEditor editor;
 
-        void Setup() {
+        void setup() {
             editor.SetText("
                 int main() {\n
                 int x = 10;\n
@@ -109,7 +109,7 @@
             editor.SetBreakpoints(breakpoints);
         }
 
-        void Render() {
+        void render() {
             ImGui::Begin("Editor With Breakpoints");
             editor.Render("TextEditor");
             ImGui::End();
