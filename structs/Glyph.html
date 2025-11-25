@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Glyph - ImGuiColorTextEdit Documentation</title>
   <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -75,6 +79,36 @@
       </tr>
     </table>
 
+    <h2>Example</h2>
+    <pre><code class="cpp">
+        #include "TextEditor.h"
+        #include "imgui.h"
+
+        TextEditor editor;
+
+        void setupEditor() {
+            std::vector&lt;TextEditor::Glyph&gt; line;
+
+            line.push_back(TextEditor::Glyph('i', TextEditor::PaletteIndex::Keyword));
+            line.push_back(TextEditor::Glyph('n', TextEditor::PaletteIndex::Keyword));
+            line.push_back(TextEditor::Glyph('t', TextEditor::PaletteIndex::Keyword));
+            line.push_back(TextEditor::Glyph(' ', TextEditor::PaletteIndex::Default));
+            line.push_back(TextEditor::Glyph('x', TextEditor::PaletteIndex::Identifier));
+            line.push_back(TextEditor::Glyph(';', TextEditor::PaletteIndex::Punctuation));
+
+            std::vector&lt;TextEditor::Line&gt; lines;
+            lines.push_back(line);
+
+            editor.SetTextLines(lines);
+        }
+
+        void render() {
+            ImGui::Begin("Editor with Glyphs");
+            editor.Render("TextEditor Example");
+            ImGui::End();
+        }
+
+      </code></pre>
   </div>
   <br>
   <hr>
