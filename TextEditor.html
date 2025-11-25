@@ -82,57 +82,57 @@
           <td>Represents a single undo/redo action in the editor</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::unordered_set&lt;int&gt;</td>
           <td>Breakpoints</td>
           <td>Set of integer line numbers used for breakpoints</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef uint8_t</td>
           <td>Char</td>
           <td>Character type used for editor text (uint8_t)</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::map&lt;int, std::string&gt;</td>
           <td>ErrorMarkers</td>
           <td>Map of line numbers to error messages</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::unordered_map&lt;std::string, Identifier&gt;</td>
           <td>Identifiers</td>
           <td>Map from identifier name to Identifier struct</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::unordered_set&lt;std::string&gt;</td>
           <td>Keywords</td>
           <td>Set of language keywords</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::vector&lt;Glyph&gt;</td>
           <td>Line</td>
           <td>Vector of Glyphs representing a single line of text</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::vector&lt;Line&gt;</td>
           <td>Lines</td>
           <td>Vector of Line, representing all text in the editor</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::array&lt;ImU32, (unsigned)PaletteIndex::Max&gt;</td>
           <td>Palette</td>
           <td>Array of colors (ImU32) for syntax highlighting</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::vector&lt;std::pair&lt;std::regex, PaletteIndex&gt;&gt;</td>
           <td>RegexList</td>
           <td>Vector of regex and palette pairs used for syntax highlighting</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::string</td>
           <td>String</td>
           <td>Alias for std::string</td>
         </tr>
         <tr>
-          <td>typedef</td>
+          <td>typedef std::vector&lt;UndoRecord&gt;</td>
           <td>UndoBuffer</td>
           <td>Vector of UndoRecord used for undo/redo stack</td>
         </tr>
